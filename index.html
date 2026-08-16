@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENDSS DIGITAL — Design & Growth Studio, Bangalore</title>
+<meta name="description" content="TRENDSS DIGITAL is a Bangalore-based UI/UX, branding, and digital marketing studio. Design that performs, brands that stick.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link rel="icon" href="images/logo-mark.svg" type="image/svg+xml">
+
+<style>
+  :root{
+    --ink:#0E2420;
+    --ink-soft:#173A32;
+    --ink-line: rgba(243,247,245,0.12);
+    --paper:#F5F7F4;
+    --paper-line: rgba(15,36,30,0.10);
+    --primary:#00875A;
+    --primary-dim:#00714B;
+    --gold:#FFD700;
+    --text-dark:#1F2937;
+    --text-dark-soft: rgba(31,41,55,0.68);
+    --text-light:#F3F7F5;
+    --text-light-soft: rgba(243,247,245,0.66);
+    --max: 1120px;
+    --pad: clamp(1.25rem, 4vw, 3rem);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text-dark);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    gap:0.5rem;
+    margin-bottom:1rem;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--gold);
+    border-radius:50%;
+    flex-shrink:0;
+  }
+  section.dark .eyebrow{ color:var(--gold); }
+
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 var(--pad); }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:0.85rem 0;
+    background:#fff;
+    border-bottom:1px solid var(--paper-line);
+    transition: box-shadow 0.35s ease, padding 0.35s ease;
+  }
+  header.scrolled{
+    padding: 0.6rem 0;
+    box-shadow: 0 6px 24px rgba(15,36,30,0.08);
+  }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; }
+
+  .logo{
+    display:flex; align-items:center;
+    text-decoration:none;
+    line-height:0;
+  }
+  .logo img{ height:44px; width:auto; display:block; }
+
+  .nav-links{
+    display:flex; align-items:center; gap:2.1rem;
+    list-style:none; margin:0; padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    font-size:0.88rem;
+    font-weight:500;
+    color:var(--text-dark-soft);
+    transition:color 0.2s ease;
+  }
+  .nav-links a:hover{ color:var(--primary); }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    padding:0.7rem 1.35rem;
+    border-radius:100px;
+    text-decoration:none;
+    border:1px solid transparent;
+    cursor:pointer;
+    transition: transform 0.2s ease, background 0.2s ease, border-color .2s ease, color .2s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-solid{ background:var(--primary); color:#fff; }
+  .btn-solid:hover{ background:var(--primary-dim); }
+  .btn-ghost-dark{ border-color: rgba(243,238,247,0.3); color:var(--text-light); }
+  .btn-ghost-dark:hover{ border-color: var(--text-light); }
+  .btn-ghost-light{ border-color: var(--paper-line); color:var(--text-dark); }
+  .btn-ghost-light:hover{ border-color: var(--text-dark); }
+
+  .nav-cta{ display:flex; align-items:center; gap:1rem; }
+  .hamburger{ display:none; background:none; border:none; cursor:pointer; padding:0.3rem; }
+  .hamburger span{ display:block; width:22px; height:2px; background:var(--text-dark); margin:5px 0; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: radial-gradient(120% 90% at 18% -10%, #164A3C 0%, var(--ink) 55%);
+    color:var(--text-light);
+    padding: clamp(7.5rem, 16vw, 11rem) 0 clamp(3.5rem, 8vw, 5rem);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-15%; top:10%;
+    width:520px; height:520px;
+    background: radial-gradient(circle, rgba(0,135,90,0.4), transparent 70%);
+    filter: blur(10px);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; z-index:1; max-width:760px; }
+  .hero h1{
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    line-height:1.04;
+  }
+  .hero h1 .accent{ color:var(--primary); }
+  .hero h1 .accent2{ color:var(--gold); }
+  .hero p.lede{
+    margin-top:1.5rem;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height:1.6;
+    color:var(--text-light-soft);
+    max-width: 560px;
+  }
+  .hero-ctas{ display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap; }
+
+  .hero-meta{
+    margin-top:3.5rem;
+    display:flex; gap:2.5rem; flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    color:var(--text-light-soft);
+    text-transform:uppercase;
+  }
+  .hero-meta span{ color:var(--text-light); }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    background:var(--primary);
+    color:#0E2420;
+    overflow:hidden;
+    white-space:nowrap;
+    border-top:1px solid rgba(0,0,0,0.08);
+    border-bottom:1px solid rgba(0,0,0,0.08);
+  }
+  .marquee-track{
+    display:inline-flex;
+    animation: scroll-left 32s linear infinite;
+  }
+  .marquee:hover .marquee-track{ animation-play-state: paused; }
+  .marquee-track span{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: clamp(1rem, 2.2vw, 1.5rem);
+    padding: 0.9rem 1.5rem;
+    display:inline-flex;
+    align-items:center;
+    gap:1.5rem;
+  }
+  .marquee-track span::after{
+    content:"◆";
+    font-size:0.7rem;
+    opacity:0.5;
+  }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: clamp(4rem, 9vw, 7rem) 0; }
+  section.dark{ background:var(--ink); color:var(--text-light); }
+  .section-head{ max-width:640px; margin-bottom:3rem; }
+  .section-head h2{ font-size: clamp(1.8rem, 4vw, 2.6rem); line-height:1.12; }
+  .section-head p{ margin-top:1rem; color:var(--text-dark-soft); line-height:1.7; font-size:1.02rem; }
+  section.dark .section-head p{ color:var(--text-light-soft); }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in-view{ opacity:1; transform:none; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap:3.5rem; align-items:start; }
+  .about-grid p{ line-height:1.75; color:var(--text-dark-soft); font-size:1.02rem; }
+  .about-grid p + p{ margin-top:1.1rem; }
+  .pillars{ display:flex; flex-direction:column; gap:1.5rem; }
+  .pillar{ padding:1.5rem; border:1px solid var(--paper-line); border-radius:16px; background:#fff; }
+  .pillar h3{ font-size:1.02rem; font-weight:700; }
+  .pillar p{ margin:0.4rem 0 0; font-size:0.9rem; color:var(--text-dark-soft); line-height:1.55; }
+
+  /* ---------- SERVICES ---------- */
+  .service-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1.25rem; }
+  .service-card{
+    background: var(--ink-soft);
+    border:1px solid var(--ink-line);
+    border-radius:20px;
+    padding:2rem 1.6rem;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .service-card:hover{ border-color:var(--primary); transform:translateY(-4px); }
+  .service-card .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:var(--gold);
+    letter-spacing:0.08em;
+  }
+  .service-card h3{ font-size:1.15rem; margin-top:1.1rem; color:var(--text-light); }
+  .service-card p{ margin-top:0.6rem; font-size:0.9rem; line-height:1.6; color:var(--text-light-soft); }
+
+  /* ---------- MASCOT ---------- */
+  .mascot-section{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap:3.5rem; align-items:center; }
+  .mascot-art{ display:flex; justify-content:center; position:relative; }
+  .mascot-art::before{
+    content:"";
+    position:absolute; inset:6% 10%;
+    background: radial-gradient(circle, rgba(0,135,90,0.28), rgba(255,215,0,0.22) 70%, transparent 75%);
+    filter: blur(6px);
+    z-index:0;
+    border-radius:50%;
+  }
+  .mascot-art img{
+    position:relative; z-index:1;
+    width:100%; max-width:320px; height:auto;
+    border-radius:24px;
+    box-shadow: 0 24px 50px rgba(14,36,32,0.25);
+    border: 6px solid #fff;
+  }
+  .mascot-copy p{ line-height:1.75; color:var(--text-dark-soft); font-size:1.02rem; }
+  .mascot-copy p + p{ margin-top:1rem; }
+
+  /* ---------- WORK / VIDEO ---------- */
+  .video-card{
+    display:grid; grid-template-columns:auto 1fr; gap:1.75rem; align-items:center;
+    background:var(--ink-soft);
+    border:1px solid var(--ink-line);
+    border-radius:20px;
+    padding:1.75rem;
+    text-decoration:none;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .video-card:hover{ border-color:var(--gold); transform:translateY(-3px); }
+  .play-btn{
+    width:64px; height:64px; border-radius:50%;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .play-btn svg{ width:20px; height:20px; }
+  .video-card h3{ color:var(--text-light); font-size:1.15rem; }
+  .video-card p{ margin-top:0.4rem; color:var(--text-light-soft); font-size:0.9rem; }
+
+  /* ---------- NEXT ---------- */
+  .next-band{
+    background: var(--primary);
+    border-radius:24px;
+    padding: clamp(2.5rem, 6vw, 4rem);
+    display:grid; grid-template-columns: 1.2fr 0.8fr; gap:2rem; align-items:center;
+    color:#0E2420;
+  }
+  .next-band h2{ font-size:clamp(1.6rem, 3.4vw, 2.2rem); }
+  .next-band p{ margin-top:1rem; line-height:1.65; color:rgba(20,16,28,0.75); }
+  .next-band .btn-solid{ background:#0E2420; }
+  .next-band .btn-solid:hover{ background:#000; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:3rem; }
+  .contact-card{
+    border:1px solid var(--paper-line);
+    border-radius:20px;
+    padding:2rem;
+    background:#fff;
+  }
+  .contact-card h3{ font-size:0.75rem; font-family:'IBM Plex Mono', monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dark-soft); font-weight:500; }
+  .contact-card a.big-link{
+    display:block; margin-top:0.6rem;
+    font-family:'Space Grotesk', sans-serif; font-weight:700;
+    font-size:1.35rem; text-decoration:none; color:var(--text-dark);
+  }
+  .contact-card a.big-link:hover{ color:var(--primary); }
+  .contact-list{ list-style:none; padding:0; margin:1.5rem 0 0; display:flex; flex-direction:column; gap:1.4rem; }
+  .contact-list li{ display:flex; gap:1rem; align-items:flex-start; }
+  .contact-list .icon{ width:38px; height:38px; border-radius:10px; background:var(--paper); border:1px solid var(--paper-line); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .contact-list .icon svg{ width:17px; height:17px; }
+  .contact-list h4{ margin:0; font-size:0.7rem; font-family:'IBM Plex Mono', monospace; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dark-soft); font-weight:500; }
+  .contact-list p{ margin:0.2rem 0 0; font-size:0.98rem; line-height:1.5; }
+  .socials{ display:flex; gap:0.75rem; margin-top:1.75rem; }
+  .socials a{
+    width:40px; height:40px; border-radius:50%;
+    border:1px solid var(--paper-line);
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none; color:var(--text-dark);
+    transition: background 0.2s ease, color 0.2s ease, border-color .2s ease;
+  }
+  .socials a:hover{ background:var(--primary); border-color:var(--primary); color:#fff; }
+  .socials svg{ width:16px; height:16px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color: var(--text-light-soft);
+    padding:2.5rem 0;
+    font-size:0.85rem;
+  }
+  footer .wrap{ display:flex; flex-direction:column; gap:1.5rem; }
+  footer .foot-top{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  footer .foot-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding-top:1.5rem; border-top:1px solid var(--ink-line); }
+  footer .foot-logo{
+    background:#fff; border-radius:10px; padding:0.75rem 1.1rem; display:inline-flex; line-height:0;
+  }
+  footer .foot-logo img{ height:44px; width:auto; display:block; }
+  footer .socials a{ border-color:var(--ink-line); color:var(--text-light-soft); }
+  footer .socials a:hover{ background:var(--primary); border-color:var(--primary); color:#fff; }
+  footer a{ text-decoration:none; color:var(--text-light-soft); }
+  footer a:hover{ color:var(--text-light); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 880px){
+    .nav-links{
+      position:fixed; top:0; right:0; height:100vh; width:78%; max-width:320px;
+      background:#fff; flex-direction:column; align-items:flex-start;
+      padding: 6rem 2rem 2rem; gap:1.6rem;
+      transform:translateX(100%); transition: transform 0.35s ease;
+      box-shadow: -8px 0 30px rgba(15,36,30,0.15);
+    }
+    .nav-links.open{ transform:translateX(0); }
+    .nav-links a{ font-size:1.05rem; color:var(--text-dark); }
+    .hamburger{ display:block; }
+    .nav-cta .btn-solid{ display:none; }
+    .about-grid, .mascot-section, .contact-grid{ grid-template-columns:1fr; }
+    .mascot-art{ order:-1; }
+    .service-grid{ grid-template-columns:1fr 1fr; }
+    .next-band{ grid-template-columns:1fr; }
+    .video-card{ grid-template-columns:auto 1fr; }
+  }
+  @media (max-width: 560px){
+    .service-grid{ grid-template-columns:1fr; }
+    .hero-ctas{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="logo">
+      <img src="images/logo.png" alt="TRENDSS DIGITAL">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#trendo">Branding</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-solid">Get in touch</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <p class="eyebrow" style="color:#FFD700">Bangalore · UI/UX · Branding · Growth</p>
+      <h1>Design that <span class="accent">performs.</span><br>Brands that <span class="accent2">stick.</span></h1>
+      <p class="lede">TRENDSS DIGITAL is a Bangalore-based design and marketing studio, built by product designers who've shipped for real teams — now bringing that craft to startups, small businesses, and growing brands.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-solid">Start a project</a>
+        <a href="#services" class="btn btn-ghost-dark">See our services</a>
+      </div>
+      <div class="hero-meta">
+        <div>Studio <span>Bangalore, India</span></div>
+        <div>Focus <span>UI/UX · Branding · AI Video · Marketing</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>UI/UX DESIGN</span><span>BRANDING &amp; IDENTITY</span><span>SHORT-FORM AI VIDEO</span><span>SOCIAL MEDIA MARKETING</span><span>PAID ADS</span><span>INFLUENCER PROMOTIONS</span><span>DEVOTIONAL CONTENT</span>
+      <span>UI/UX DESIGN</span><span>BRANDING &amp; IDENTITY</span><span>SHORT-FORM AI VIDEO</span><span>SOCIAL MEDIA MARKETING</span><span>PAID ADS</span><span>INFLUENCER PROMOTIONS</span><span>DEVOTIONAL CONTENT</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="eyebrow">About</p>
+          <h2 style="font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.12; margin-bottom:1.5rem;">Built on the studio floor, not a mood board.</h2>
+          <p>Our founders came up as product and graphic designers inside the IT industry — building scalable products, working alongside cross-functional teams, startups, and enterprises. That's where TRENDSS DIGITAL's approach comes from: equal parts creative instinct and strategic clarity.</p>
+          <p>We started the studio to close the gap between design and impact. Today we support small businesses, startups, and established brands with UI/UX design, branding, graphic design, and social media advertising — tailored to what each client actually needs, not a one-size template.</p>
+        </div>
+        <div class="pillars reveal">
+          <div class="pillar">
+            <h3>Industry-tested</h3>
+            <p>Hands-on experience building real products before we ever built the studio.</p>
+          </div>
+          <div class="pillar">
+            <h3>User-first</h3>
+            <p>Every decision starts with how a real person will actually use it.</p>
+          </div>
+          <div class="pillar">
+            <h3>Built to grow</h3>
+            <p>Design and marketing working together, not as separate line items.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="dark">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">What we do</p>
+        <h2>End-to-end design and marketing, under one roof.</h2>
+        <p>From first sketch to the ad that puts your brand in front of the right people — we handle the whole arc.</p>
+      </div>
+      <div class="service-grid">
+        <div class="service-card reveal">
+          <p class="num">01</p>
+          <h3>UI/UX Design</h3>
+          <p>Product and app experiences that are simple to use and easy to love, grounded in real user research.</p>
+        </div>
+        <div class="service-card reveal">
+          <p class="num">02</p>
+          <h3>Branding &amp; Identity</h3>
+          <p>Logos, packaging, and visual systems built to be recognized — and remembered.</p>
+        </div>
+        <div class="service-card reveal">
+          <p class="num">03</p>
+          <h3>Short-Form AI Video</h3>
+          <p>Reels and Shorts built for how people actually scroll on Instagram, YouTube, and Facebook.</p>
+        </div>
+        <div class="service-card reveal">
+          <p class="num">04</p>
+          <h3>Social Media Marketing</h3>
+          <p>Content and strategy that turns a feed into a pipeline of real customers.</p>
+        </div>
+        <div class="service-card reveal">
+          <p class="num">05</p>
+          <h3>Paid Ads &amp; Influencer Promotions</h3>
+          <p>Targeted campaigns that put your brand in front of the audience that matters.</p>
+        </div>
+        <div class="service-card reveal">
+          <p class="num">06</p>
+          <h3>Devotional Content</h3>
+          <p>Thoughtful, culturally-aware content built for spiritual and devotional brands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MASCOT / BRANDING -->
+  <section id="trendo">
+    <div class="wrap">
+      <div class="mascot-section">
+        <div class="mascot-art reveal">
+          <img src="images/mascot.jpeg" alt="TRENDO, the TRENDSS DIGITAL mascot — a green and gold plush character">
+        </div>
+        <div class="mascot-copy reveal">
+          <p class="eyebrow">Our mascot</p>
+          <h2 style="font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.12; margin-bottom:1.5rem;">Say hi to TRENDO.</h2>
+          <p>TRENDO is the face of TRENDSS DIGITAL — a small signal in a noisy feed. We use it across our branding and packaging work as a reminder that good design should feel a little alive.</p>
+          <p>It shows up in client packaging, product promos, and the AI-generated visuals we build for brand campaigns — one consistent character, applied everywhere your audience meets you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="dark">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">In motion</p>
+        <h2>We tell brand stories in seconds, not minutes.</h2>
+        <p>Short-form video is where attention actually lives right now — here's where you can see ours.</p>
+      </div>
+      <a class="video-card reveal" href="https://www.youtube.com/@trendssdigital" target="_blank" rel="noopener">
+        <div class="play-btn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5Z" fill="#0E2420"/></svg>
+        </div>
+        <div>
+          <h3>Watch our work on YouTube</h3>
+          <p>Reels, Shorts, and AI-assisted brand videos — @trendssdigital</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section>
+    <div class="wrap">
+      <div class="next-band reveal">
+        <div>
+          <p class="eyebrow" style="color:#0E2420;">What's next</p>
+          <h2>Always building something new.</h2>
+          <p>We're constantly experimenting — new formats, new tools, new ways to help brands grow. Follow along to see what's next.</p>
+        </div>
+        <div>
+          <a class="btn btn-solid" href="https://www.instagram.com/trendssdigital/" target="_blank" rel="noopener">Follow on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h2 style="font-size:clamp(1.8rem, 4vw, 2.6rem); line-height:1.12;">Let's build something people notice.</h2>
+          <p style="margin-top:1.25rem; color:var(--text-dark-soft); line-height:1.7;">Tell us about your brand, your product, or the campaign you're planning. We'll get back to you within a couple of days.</p>
+          <div class="socials">
+            <a href="https://www.youtube.com/@trendssdigital" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a3 3 0 0 0-2.1-2.1C18.7 4 12 4 12 4s-6.7 0-8.44.6a3 3 0 0 0-2.1 2.1C1 8.4 1 12 1 12s0 3.6.46 5.3a3 3 0 0 0 2.1 2.1C5.3 20 12 20 12 20s6.7 0 8.44-.6a3 3 0 0 0 2.1-2.1C23 15.6 23 12 23 12ZM9.75 15.5v-7l6 3.5-6 3.5Z"/></svg></a>
+            <a href="https://www.instagram.com/trendssdigital/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.13s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.13-.06c-1.07-.05-1.79-.22-2.43-.46a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.44 2.5c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5ZM18.4 6.6a1.2 1.2 0 1 0-2.4 0 1.2 1.2 0 0 0 2.4 0Z"/></svg></a>
+            <a href="https://x.com/TrendssDig86587" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23.3 22H16.7l-5.2-6.8L5.5 22H2.4l8-9.2L1.2 2h6.8l4.7 6.2L18.9 2Zm-1.15 18h1.7L7.35 4H5.5l12.25 16Z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="contact-card reveal">
+          <h3>Email</h3>
+          <a class="big-link" href="mailto:hello@trendssdigital.com">hello@trendssdigital.com</a>
+          <ul class="contact-list">
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1B1620" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></div>
+              <div>
+                <h4>Phone</h4>
+                <p><a href="tel:+917353515663">+91 73535 15663</a></p>
+              </div>
+            </li>
+            <li>
+              <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1B1620" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div>
+                <h4>Studio</h4>
+                <p>3rd Block, 4th Main, Thyagarajanagar,<br>Bangalore – 560070</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a href="images/logo.png" class="foot-logo" aria-label="TRENDSS DIGITAL"><img src="images/logo.png" alt="TRENDSS DIGITAL"></a>
+      <div class="socials">
+        <a href="https://www.youtube.com/@trendssdigital" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.6-.46-5.3a3 3 0 0 0-2.1-2.1C18.7 4 12 4 12 4s-6.7 0-8.44.6a3 3 0 0 0-2.1 2.1C1 8.4 1 12 1 12s0 3.6.46 5.3a3 3 0 0 0 2.1 2.1C5.3 20 12 20 12 20s6.7 0 8.44-.6a3 3 0 0 0 2.1-2.1C23 15.6 23 12 23 12ZM9.75 15.5v-7l6 3.5-6 3.5Z"/></svg></a>
+        <a href="https://www.instagram.com/trendssdigital/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.72 0 3.06.01 4.12.06 1.07.05 1.79.22 2.43.46.66.26 1.22.6 1.77 1.15.55.55.89 1.11 1.15 1.77.24.64.41 1.36.46 2.43.05 1.06.06 1.4.06 4.13s-.01 3.06-.06 4.12c-.05 1.07-.22 1.79-.46 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.24-1.36.41-2.43.46-1.06.05-1.4.06-4.12.06s-3.06-.01-4.13-.06c-1.07-.05-1.79-.22-2.43-.46a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.24-.64-.41-1.36-.46-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.07.22-1.79.46-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.44 2.5c.64-.24 1.36-.41 2.43-.46C8.94 2.01 9.28 2 12 2Zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.25a3.25 3.25 0 1 1 0-6.5 3.25 3.25 0 0 1 0 6.5ZM18.4 6.6a1.2 1.2 0 1 0-2.4 0 1.2 1.2 0 0 0 2.4 0Z"/></svg></a>
+        <a href="https://x.com/TrendssDig86587" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.5 8.6L23.3 22H16.7l-5.2-6.8L5.5 22H2.4l8-9.2L1.2 2h6.8l4.7 6.2L18.9 2Zm-1.15 18h1.7L7.35 4H5.5l12.25 16Z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> TRENDSS DIGITAL. Bangalore, India.</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sticky header background on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', false);
+  }));
+
+  // Scroll reveal
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
